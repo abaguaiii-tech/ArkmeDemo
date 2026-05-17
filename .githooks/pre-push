@@ -1,0 +1,13 @@
+#!/usr/bin/env sh
+set -eu
+
+echo "[ArkmeDemo] running pnpm verify:answer before push..."
+if command -v pnpm >/dev/null 2>&1; then
+  pnpm verify:answer
+else
+  echo "[ArkmeDemo] pnpm not found; running equivalent npm checks..."
+  npm run lint
+  npm run build
+  npm run verify:codex-log
+  npm run verify:answer-standard
+fi
